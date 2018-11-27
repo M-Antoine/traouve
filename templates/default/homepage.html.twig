@@ -5,11 +5,11 @@
         <h2>Les derniers objets trouvés</h2>
         <section class="row">
 
-                {% for traobject in traobjects if traobject.state.label == 'Trouvé' %}
+            {% for traobjectfound in traobjectsfounds %}
                 <article class="col-md-3">
-                            {% include 'traobject/card.html.twig' %}
-                        </article>
-                    {% endfor %}
+                    {% include 'traobject/card.html.twig' with {'traobject': traobjectfound }%}
+                </article>
+            {% endfor %}
 
         </section>
     </div>
@@ -18,9 +18,9 @@
         <h2>Les derniers objets perdus</h2>
         <section class="row">
 
-            {% for traobject in traobjects if traobject.state.label == 'Perdu' %}
+            {% for traobjectlost in traobjectslosts %}
                 <article class="col-md-3">
-                    {% include 'traobject/card.html.twig' %}
+                    {% include 'traobject/card.html.twig' with {'traobject': traobjectlost }%}
                 </article>
             {% endfor %}
 

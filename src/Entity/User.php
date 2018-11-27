@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -25,21 +26,42 @@ class User implements UserInterface
     private $firstname;
 
     /** @var string
-    * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $lastname;
 
     /** @var @var string
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phone;
 
     /** @var string
-     * @ORM\Column(type="string", length=255)
- *
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-
     private $picture;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $email;
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
+    /**
+     * @var string
+     * @Assert\NotBlank
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     /**
      * @return mixed
@@ -81,7 +103,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getFirstname(): string
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
@@ -101,7 +123,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getLastname(): string
+    public function getLastname(): ?string
     {
         return $this->lastname;
     }
@@ -117,27 +139,9 @@ class User implements UserInterface
     }
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
-
-
-    /**
-     * @var string
-     * @Assert\NotBlank
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
-
-    /**
      * @return string
      */
-    public function getPlainPassword(): string
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
@@ -151,12 +155,6 @@ class User implements UserInterface
         $this->plainPassword = $plainPassword;
         return $this;
     }
-
-    /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
-     */
-    private $password;
 
     public function getId(): ?int
     {
