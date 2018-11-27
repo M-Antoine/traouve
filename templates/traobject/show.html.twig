@@ -30,9 +30,9 @@
 
                 <footer class="card-footer">
                     <ul class="object-features">
-                        <li><a href="#" class="badge" style="background-color: #dc143c;"><i class="fa fa-money"></i> Portefeuille</a></li>
-                        <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i> 21/11/2018</a></li>
-                        <li><a href="#" class="badge badge-info"><i class="fa fa-map-marker"></i> Rennes</a></li>
+                        <li><a href="#" class="badge" style="background-color: #dc143c;"><i class="fa fa-money"></i>{{ traobject.category.label }}</a></li>
+                        <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i>{{ traobject.eventAt|date("d m y") }}</a></li>
+                        <li><a href="#" class="badge badge-info"><i class="fa fa-map-marker"></i>{{ traobject.city }}</a></li>
                     </ul>
                 </footer>
             </div>

@@ -4,63 +4,26 @@
     <div class="container">
         <h2>Les derniers objets trouvés</h2>
         <section class="row">
-            {% for traobject in traobjects %}
+
+                {% for traobject in traobjects if traobject.state.label == 'Trouvé' %}
                 <article class="col-md-3">
+                            {% include 'traobject/card.html.twig' %}
+                        </article>
+                    {% endfor %}
 
-                    <div class="card object-card">
-
-                                <span class="badge badge-primary badge-found"><i
-                                            class="fa fa-map-pin"></i>{{ traobject.state.label }}</span>
-                        <img class="card-img-top" src="{{ asset('uploads/') ~ traobject.picture }}"
-                             alt="{{ traobject.title }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ traobject.description }}</h5>
-                            <ul class="object-features">
-                                <li><a href="#" class="badge" style="background-color: #dc143c;"><i
-                                                class="fa fa-money"></i>{{ traobject.category.label }}</a></li>
-                                <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i>
-                                        {{ traobject.eventAt|date("d m y") }}</a></li>
-                                <li><a href="#" class="badge badge-info"><i
-                                                class="fa fa-map-marker"></i>{{ traobject.city }}</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                            
-
-                        <a href="{{ path('traobject_show', {'id': traobject.id}) }}" class="card-footer-btn btn btn-primary"><i class="fa fa-eye"></i>
-                            Afficher</a>
-
-
-                    </div>
-
-                </article>
-            {% endfor %}
         </section>
     </div>
 
     <div class="container">
         <h2>Les derniers objets perdus</h2>
         <section class="row">
-            <article class="col-md-3">
-                <div class="card object-card">
-                    <span class="badge badge-primary badge-lost"><i class="fa fa-map-pin"></i> Perdu</span>
-                    <img class="card-img-top" src="uploads/teddy-bear.jpg" alt="Jouet">
-                    <div class="card-body">
-                        <h5 class="card-title">Ours en peluche à Sainte-Anne</h5>
-                        <ul class="object-features">
-                            <li><a href="#" class="badge" style="background-color: #dccd14;"><i
-                                            class="fa fa-money"></i> Jouet</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i>
-                                    19/11/2018</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-map-marker"></i> Rennes</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <a href="object.html" class="card-footer-btn btn btn-primary"><i class="fa fa-eye"></i>
-                        Afficher</a>
-                </div>
-            </article>
+
+            {% for traobject in traobjects if traobject.state.label == 'Perdu' %}
+                <article class="col-md-3">
+                    {% include 'traobject/card.html.twig' %}
+                </article>
+            {% endfor %}
+
         </section>
     </div>
 

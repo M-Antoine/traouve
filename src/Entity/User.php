@@ -126,6 +126,32 @@ class User implements UserInterface
      */
     private $roles = [];
 
+
+    /**
+     * @var string
+     * @Assert\NotBlank
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     * @return User
+     */
+    public function setPlainPassword(string $plainPassword): User
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
@@ -148,6 +174,7 @@ class User implements UserInterface
 
         return $this;
     }
+
 
 
 
