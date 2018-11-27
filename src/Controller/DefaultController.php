@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
-
+use App\Entity\Traobject;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * Class DefaultController
+ * @package App\Controller
+ */
 
 class DefaultController extends AbstractController
 {
@@ -14,7 +19,11 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
-        return $this->render('default/homepage.html.twig');
+        $traobjects = $this->getDoctrine()->getRepository(Traobject::class)->findAll();
+        return $this->render('default/homepage.html.twig', [
+            "traobjects" => $traobjects,
+
+    ]);
     }
 
 }

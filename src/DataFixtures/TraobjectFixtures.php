@@ -14,9 +14,10 @@ class TraobjectFixtures extends Fixture implements DependentFixtureInterface
     {
         $objnounours = new Traobject();
         $objnounours->setTitle("Nounours");
-        $objnounours->setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fermentum finibus efficitur.");
+        $objnounours->setDescription("Nounours perdu rue de la monnaie.");
         $objnounours->setEventAt(new \DateTime('2018-12-11'));
         $objnounours->setCity("Rennes");
+        $objnounours->setPicture("teddy-bear.jpg");
         $objnounours->setCategory($this->getReference("cat-3"));
         $objnounours->setState($this->getReference("states-1"));
         $objnounours->setUser($this->getReference("user-2"));
@@ -26,9 +27,10 @@ class TraobjectFixtures extends Fixture implements DependentFixtureInterface
 
         $objectcle = new Traobject();
         $objectcle->setTitle("Clés");
-        $objectcle->setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit..");
+        $objectcle->setDescription("Clés rue du général de Gaulle..");
         $objectcle->setEventAt(new \DateTime('2018-04-23'));
         $objectcle->setCity("Saint-Malo");
+        $objectcle->setPicture("keys.jpg");
         $objectcle->setCategory($this->getReference("cat-1"));
         $objectcle->setState($this->getReference("states-2"));
         $objectcle->setUser($this->getReference("user-4"));
@@ -38,11 +40,12 @@ class TraobjectFixtures extends Fixture implements DependentFixtureInterface
 
         $objectportef = new Traobject();
         $objectportef->setTitle("Porte-Feuille");
-        $objectportef->setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit..");
+        $objectportef->setDescription("Portefeuille retrouvé à l'arrêt de bus..");
         $objectportef->setEventAt(new \DateTime('2018-03-05'));
         $objectportef->setCity("Rennes");
+        $objectportef->setPicture("wallet.jpg");
         $objectportef->setCategory($this->getReference("cat-2"));
-        $objectportef->setState($this->getReference("states-1"));
+        $objectportef->setState($this->getReference("states-2"));
         $objectportef->setUser($this->getReference("user-1"));
         $objectportef->setCounty($this->getReference("county-2"));
         $manager->persist($objectportef);
