@@ -20,18 +20,40 @@
     </h5>
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="{{ path('homepage') }}">Accueil</a>
-        <a class="p-2 text-dark" href="{{ path('traobject_index') }}">Déposer une annonce</a>
 
-        <a class="p-2 text-dark" href="">Objets perdus</a>
+
+
+        {% if is_granted('ROLE_USER') %}
+            <a class="p-2 text-dark" href="{{ path('traobject_new') }}">Déposer une annonce</a>
+        {% endif %}
+
+
+        <a class="p-2 text-dark" href="{{ path('state_show', {'id': state_lost.id}) }}">Objets perdus</a>
+
 
         <a class="p-2 text-dark" href="list-found.html">Objets trouvés</a>
     </nav>
+
+
+    {% if app.user %}
+    <li>
+        <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">
+            <i class="fa fa-sign-in"></i>
+            Se Déconnecter
+        </a>
+    </li>
+    {% else %}
+    <a class="btn btn-outline-primary mr-2" href="{{ path('app_login') }}">
+        <i class="fa fa-user-plus"></i>
+        Se connecter
+    </a>
+
     <a class="btn btn-outline-primary" href="{{ path('user_registration') }}">
         <i class="fa fa-user-plus"></i>
         Créer un compte
     </a>
+    {% endif %}
 </div>
-
 <main class="main-content">
 
     <header class="header-home">
@@ -41,7 +63,7 @@
                 objets retrouvés grâce à notre plateforme de mise en relation !</p>
             <section class="row">
                 <article class="col-md-4">
-                    <a class="btn btn-primary" href="">
+                    <a class="btn btn-primary" href="{{ path('traobject_new') }}">
                         <i class="fa fa-plus-circle"></i>
                         <h2>Créer un avis de recherche</h2>
                     </a>
@@ -83,7 +105,7 @@
                     </div>
                     <div class="col-6 col-md">
                         <h5>Catégories</h5>
-                            {{ render(controller('App\\Controller\\CategoryController::dropdown')) }}
+                        {{ render(controller('App\\Controller\\CategoryController::dropdown')) }}
 
                     </div>
                     <div class="col-6 col-md">

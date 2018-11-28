@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +36,24 @@ class County
      */
     private $zipcode;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Traobject", mappedBy="county")
+     */
+    private $traobject;
+
+
+
+    /**
+     * County constructor.
+     */
+    public function __construct()
+    {
+        $this->traobject = new ArrayCollection();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,5 +83,26 @@ class County
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getLabel();
+    }
 
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTraobject(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->traobject;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $traobject
+     * @return County
+     */
+    public function setTraobject(\Doctrine\Common\Collections\Collection $traobject): County
+    {
+        $this->traobject = $traobject;
+
+    }
 }

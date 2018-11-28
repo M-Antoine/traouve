@@ -87,9 +87,9 @@ class Traobject
     private $updatedAt;
 
     /**
-     * @var Category
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="traobject")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      * })
@@ -99,7 +99,7 @@ class Traobject
     /**
      * @var County
      *
-     * @ORM\ManyToOne(targetEntity="County")
+     * @ORM\ManyToOne(targetEntity="County", inversedBy="traobject")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="county_id", referencedColumnName="id")
      * })
@@ -125,6 +125,16 @@ class Traobject
      * })
      */
     private $user;
+
+    /**
+     * Traobject constructor.
+     * @param \Doctrine\Common\Collections\Collection $category
+     */
+    public function __construct(\Doctrine\Common\Collections\Collection $category)
+    {
+        $this->category = $category;
+    }
+
 
     public function getId(): ?int
     {

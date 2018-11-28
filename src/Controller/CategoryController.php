@@ -57,7 +57,7 @@ class CategoryController extends AbstractController
         return $this->render('category/show.html.twig', ['category' => $category]);
     }
 
-    /**
+    /**x²
      * @Route("/{id}/edit", name="category_edit", methods="GET|POST")
      */
     public function edit(Request $request, Category $category): Response

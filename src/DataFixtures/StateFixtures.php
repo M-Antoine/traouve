@@ -15,15 +15,15 @@ class StateFixtures extends Fixture
     {
         $perdu = new State();
         $perdu->setLabel("Perdu");
-        $perdu->setColor("Red");
+        $perdu->setColor("#ff0000");
         $manager->persist($perdu);
         $this->addReference("states-1", $perdu);
 
-        $trouvé = new State();
-        $trouvé->setLabel("Trouvé");
-        $trouvé->setColor("Green");
-        $manager->persist($trouvé);
-        $this->addReference("states-2", $trouvé);
+        $trouve = new State();
+        $trouve->setLabel("Trouvé");
+        $trouve->setColor("#33cc33");
+        $manager->persist($trouve);
+        $this->addReference("states-2", $trouve);
 
         $manager->flush();
     }

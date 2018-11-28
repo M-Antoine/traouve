@@ -41,13 +41,19 @@
 
             <h3>Commentaires</h3>
 
-            <div class="alert alert-secondary" role="alert">
-                <p>Veuillez vous connecter afin de pouvoir laisser un commentaire</p>
-                <a href="login.html" class="btn btn-primary">
-                    <i class="fa fa-sign-in"></i>
-                    Me connecter
-                </a>
-            </div>
+
+
+            {% if app.user %}
+
+            {% else %}
+                <div class="alert alert-secondary" role="alert">
+                    <p>Veuillez vous connecter afin de pouvoir laisser un commentaire</p>
+                    <a href="login.html" class="btn btn-primary">
+                        <i class="fa fa-sign-in"></i>
+                        Me connecter
+                    </a>
+                </div>
+        {% endif %}
 
             <ul class="list-unstyled">
                 <li class="media mb-1">
