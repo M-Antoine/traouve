@@ -2,6 +2,10 @@
 
 namespace App\Entity;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="traobject", indexes={@ORM\Index(name="fk_traobject_category_idx", columns={"category_id"}), @ORM\Index(name="fk_traobject_state1_idx", columns={"state_id"}), @ORM\Index(name="fk_traobject_user1_idx", columns={"user_id"}), @ORM\Index(name="fk_traobject_county1_idx", columns={"county_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\TraobjectRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Vich\Uploadable
  */
 
 class Traobject
@@ -36,6 +41,12 @@ class Traobject
      * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      */
     private $picture;
+
+    /**
+     * @Vich\UploadableField(mapping="traobject_image", fileNameProperty="picture")
+     * @var File
+     */
+    private $pictureFile;
 
     /**
      * @var string|null
@@ -87,7 +98,7 @@ class Traobject
     private $updatedAt;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Category
      *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="traobject")
      * @ORM\JoinColumns({
@@ -105,6 +116,13 @@ class Traobject
      * })
      */
     private $county;
+
+    /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="traobject")
+     */
+    private $comments;
 
     /**
      * @var State
@@ -128,13 +146,11 @@ class Traobject
 
     /**
      * Traobject constructor.
-     * @param \Doctrine\Common\Collections\Collection $category
      */
-    public function __construct(\Doctrine\Common\Collections\Collection $category)
+    public function __construct()
     {
-        $this->category = $category;
+        $this->comments = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -153,16 +169,43 @@ class Traobject
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getPicture(): ?string
     {
         return $this->picture;
     }
 
-    public function setPicture(?string $picture): self
+    /**
+     * @param null|string $picture
+     * @return Traobject
+     */
+    public function setPicture(?string $picture): Traobject
     {
         $this->picture = $picture;
 
         return $this;
+    }
+
+    /**
+     * @return null|File
+     */
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
+    /**
+     * @param File|null $picture
+     */
+    public function setPictureFile(File $picture = null)
+    {
+        $this->pictureFile = $picture;
+
+        if ($picture) {
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 
     public function getDescription(): ?string
@@ -273,6 +316,22 @@ class Traobject
         return $this;
     }
 
+    /**
+     * @return Collection
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Collection $comments
+     */
+    public function setComments(Collection $comments): void
+    {
+        $this->comments = $comments;
+    }
+
     public function getState(): ?State
     {
         return $this->state;
@@ -308,6 +367,11 @@ class Traobject
     public function setUpdateAtValue()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 
 }

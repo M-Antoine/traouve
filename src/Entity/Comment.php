@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * Comment
@@ -38,7 +40,7 @@ class Comment
     /**
      * @var Traobject
      *
-     * @ORM\ManyToOne(targetEntity="Traobject")
+     * @ORM\ManyToOne(targetEntity="Traobject", inversedBy="comments")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="traobject_id", referencedColumnName="id")
      * })
@@ -84,17 +86,7 @@ class Comment
         return $this;
     }
 
-    public function getTraobject(): ?Traobject
-    {
-        return $this->traobject;
-    }
 
-    public function setTraobject(?Traobject $traobject): self
-    {
-        $this->traobject = $traobject;
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -107,6 +99,32 @@ class Comment
 
         return $this;
     }
+
+
+    /**
+     * @return Traobject
+     */
+    public function getTraobject(): Traobject
+    {
+        return $this->traobject;
+    }
+
+    /**
+     * @param Traobject $traobject
+     * @return Comment
+     */
+    public function setTraobject(Traobject $traobject): void
+    {
+        $this->traobject = $traobject;
+    }
+
+
+    public function __toString()
+    {
+        return $this->getContent();
+    }
+
+
 
 
 }

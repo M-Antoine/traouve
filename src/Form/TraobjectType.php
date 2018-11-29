@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class TraobjectType extends AbstractType
 {
@@ -17,16 +18,14 @@ class TraobjectType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, array('label' => 'Titre'))
-            ->add('picture', FileType::class, array('label' => 'Photo'))
+            ->add('pictureFile', VichImageType::class, array('label' => 'Photo'))
             ->add('description', TextareaType::class, array('label' => 'Description'))
-            ->add('eventAt', DateType::class)
-            ->add('dateEnd', DateType::class)
+            ->add('eventAt', DateType::class, array('label' => 'Date'))
             ->add('city', null, array('label' => 'Ville'))
             ->add('address', TextType::class, array('label' => 'Adresse'))
-            ->add('createdAt', DateType::class)
-            ->add('category', null)
-            ->add('county', null)
-            ->add('state', null)
+            ->add('category', null, array('label' => 'Catégorie'))
+            ->add('county', null, array('label' => 'Département'))
+            ->add('state', null, array('label' => 'Status'))
         ;
     }
 

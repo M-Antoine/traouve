@@ -84,7 +84,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getPicture(): string
+    public function getPicture(): ?string
     {
         return $this->picture;
     }
@@ -240,6 +240,11 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->getFirstname();
+    }
+
+    public function getFullname(): string
+    {
+        return $this->getFirstname() . ' ' . $this->getLastname();
     }
 
 }

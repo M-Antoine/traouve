@@ -28,20 +28,25 @@
         {% endif %}
 
 
-        <a class="p-2 text-dark" href="{{ path('state_show', {'id': state_lost.id}) }}">Objets perdus</a>
+        <a class="p-2 text-dark" href="{{ path('show_lost') }}">Objets perdus</a>
 
 
-        <a class="p-2 text-dark" href="list-found.html">Objets trouvés</a>
+        <a class="p-2 text-dark" href="{{ path('show_found') }}">Objets trouvés</a>
     </nav>
 
 
     {% if app.user %}
-    <li>
+
+            <a class="btn btn-outline-primary mr-3" href="{{ path('admin') }}">
+                <i class="fa fa-file-signature"></i>
+                Administration
+            </a>
+
         <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">
             <i class="fa fa-sign-in"></i>
             Se Déconnecter
         </a>
-    </li>
+
     {% else %}
     <a class="btn btn-outline-primary mr-2" href="{{ path('app_login') }}">
         <i class="fa fa-user-plus"></i>
@@ -63,13 +68,21 @@
                 objets retrouvés grâce à notre plateforme de mise en relation !</p>
             <section class="row">
                 <article class="col-md-4">
+                    {% if app.user %}
                     <a class="btn btn-primary" href="{{ path('traobject_new') }}">
+                    {% else %}
+                        <a class="btn btn-primary" href="{{ path('app_login') }}">
+                    {% endif %}
                         <i class="fa fa-plus-circle"></i>
                         <h2>Créer un avis de recherche</h2>
                     </a>
                 </article>
                 <article class="col-md-4">
-                    <a class="btn btn-info" href="">
+                    {% if app.user %}
+                    <a class="btn btn-info" href="{{ path('traobject_new') }}">
+                        {% else %}
+                        <a class="btn btn-info" href="{{ path('app_login') }}">
+                            {% endif %}
                         <i class="fa fa-map-pin"></i>
                         <h2>Déclarer un objet trouvé</h2>
                     </a>

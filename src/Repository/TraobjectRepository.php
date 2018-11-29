@@ -78,4 +78,16 @@ class TraobjectRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findTraobjectByState(string $state): array
+    {
+        $qb = $this->createQueryBuilder('t');
+        $qb = $qb
+            ->innerJoin('t.state', 's')
+            ->where($qb->expr()->eq('s.label', ':state'))
+            ->orderBy('t.createdAt', 'DESC');
+        return $qb->setParameter(':state', $state)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

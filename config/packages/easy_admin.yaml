@@ -1,0 +1,39 @@
+easy_admin:
+    site_name: 'Traouve <a class="btn btn-info" href="../">Retour au site</a>'
+    entities:
+        Category:
+            class: App\Entity\Category
+            label: 'Catégorie'
+            list:
+                title: 'Liste des Catégories'
+        Comment:
+            class: App\Entity\Comment
+            label: 'Commentaire'
+            list:
+                title: 'Liste des Commentaires'
+        Traobject:
+            class: App\Entity\Traobject
+            label: 'Objet'
+            list:
+                fields:
+                - { property: 'id', type: 'int' }
+                - { property: 'title', type: 'text' }
+                - { property: 'image', type: 'image'}
+                - { property: 'event_at', type: 'datetime' }
+                - { property: 'city', type: 'text' }
+                title: 'Liste des Objets'
+            show:
+                fields:
+                - { property: 'title', type: 'text' }
+                - { property: 'image', type: 'image'}
+                - { property: 'event_at', type: 'datetime' }
+                - { property: 'city', type: 'text' }
+            new:
+                title: 'Add New Traobject'
+            edit:
+                title: 'Edit Traobject'
+        User:
+            class: App\Entity\User
+            label: 'Utilisateur'
+            list:
+                title: 'Liste des Utilisateurs'

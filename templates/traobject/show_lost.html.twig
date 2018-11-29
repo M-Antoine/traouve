@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <h2>Les derniers objets perdus</h2>
+        <section class="container">
+            {% for traobject in traobjects_lost %}
+            <div class="container">
+
+                <div class="card object-card">
+                    <h1 class="card-header">
+                <span class="badge badge-primary badge-found">
+                    <i class="fa fa-map-pin"></i>
+                    {{ traobject.state.label }}
+                </span>
+                        {{ traobject.title }}
+                    </h1>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="{{ asset('uploads/') ~ traobject.picture }}" class="img-thumbnail" alt="{{ traobject.title }}">
+                            </div>
+                            <div class="col-md-8">
+                                <p>{{ traobject.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </section>
+    </div>
+
+
+{% endblock %}

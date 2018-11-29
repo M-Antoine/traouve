@@ -1,6 +1,5 @@
 <div class="card object-card">
-                            <span class="badge badge-primary {{ traobject.state.color }}"><i
-                                        class="fa fa-map-pin"></i> {{ traobject.state.label }}</span>
+    <span class="badge badge-primary badge-found" style="background-color: {{ traobject.state.color }};"><i class="fa fa-map-pin"></i> {{ traobject.state.label }}</span>
     {% if traobject.picture %}
         <img class="card-img-top" src="{{ asset('uploads/' ~ traobject.picture) }}" alt=" {{ traobject.category.label }}">
     {% else %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Traobject;
 use App\Form\TraobjectType;
+use App\Entity\State;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,6 +92,25 @@ class TraobjectController extends AbstractController
         return $this->redirectToRoute('traobject_index');
     }
 
-
+    /**
+     * @Route("/show/found", name="show_found")
+     */
+    public function showFound()
+    {
+        $stateFound = $this->getDoctrine()->getRepository(Traobject::class)->findTraobjectByState(State::FOUND);
+        return $this->render('traobject/show_found.html.twig', [
+            'traobjects_found' => $stateFound,
+        ]);
+    }
+    /**
+     * @Route("/show/lost", name="show_lost")
+     */
+    public function showLost()
+    {
+        $stateLost = $this->getDoctrine()->getRepository(Traobject::class)->findTraobjectByState(State::LOST);
+        return $this->render('traobject/show_lost.html.twig', [
+            'traobjects_lost' => $stateLost,
+        ]);
+    }
 
 }
